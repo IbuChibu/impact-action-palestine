@@ -1,0 +1,21 @@
+from app.scrapers.change_org import scrape_change_petitions
+from app.scrapers.psc_events import scrape_psc_events
+from app.db.supabase_client import insert_action
+
+def run_scrapers_and_insert():
+    print("🔍 Scraping Change.org...")
+    petitions = scrape_change_petitions()
+
+    print("🔍 Scraping PSC events...")
+    events = scrape_psc_events()
+
+    print("📤 Inserting into Supabase...")
+    for item in petitions + events:
+        try:
+            insert_action(item)
+            print(f"✅ Inserted: {item['title']}")
+        except Exception as e:
+            print(f"❌ Failed: {item['title']} – {e}")
+
+if __name__ == "__main__":
+    run_scrapers_and_insert()

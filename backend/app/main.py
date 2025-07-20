@@ -24,24 +24,9 @@ def get_actions():
     response = supabase.table("activism_actions").select("*").execute()
     return response.data
 
-from scrapers.change_org import scrape_change_petitions
-from scrapers.psc_events import scrape_psc_events
-from db.supabase_client import insert_action
+from app.utils.scrape_and_insert import run_scrapers_and_insert
 
-def main():
-    print("Scraping Change.org...")
-    petitions = scrape_change_petitions()
-
-    print("Scraping PSC events...")
-    events = scrape_psc_events()
-
-    print("Inserting into Supabase...")
-    for item in petitions + events:
-        try:
-            insert_action(item)
-            print(f"✅ Inserted: {item['title']}")
-        except Exception as e:
-            print(f"❌ Failed: {item['title']} – {e}")
-
-if __name__ == "__main__":
-    main()
+@app.post("/scrape")
+def scrape_now():
+    run_scrapers_and_insert()
+    return {"message": "Scraping and inserting complete."}
