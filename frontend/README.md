@@ -1,4 +1,3 @@
-# Welcome to your Lovable project
 
 ## Project info
 
@@ -6,7 +5,6 @@
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
 
 **Use Lovable**
 
@@ -65,8 +63,6 @@ This project is built with:
 Simply open [Lovable](https://lovable.dev/projects/67777277-672d-44c7-9eb8-ee1065173eb4) and click on Share -> Publish.
 
 ## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
